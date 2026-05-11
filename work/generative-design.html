@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MorphCore — Elizabeth Olayinka</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #F7F5F0;
+    --surface: #EFECE5;
+    --ink: #1A1714;
+    --ink-muted: #6B6560;
+    --accent: #C0392B;
+    --accent-warm: #E8734A;
+    --accent-light: #F9EDE8;
+    --border: #DDD9D0;
+    --white: #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(247,245,240,0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+  .nav-back { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; font-weight: 500; color: var(--ink-muted); text-decoration: none; transition: color 0.2s; }
+  .nav-back:hover { color: var(--accent); }
+
+  .project-hero { padding: 8rem 0 4rem; background: var(--white); border-bottom: 1px solid var(--border); }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+  .wide-container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.05em; background: var(--accent-light); color: var(--accent); border-radius: 4px; padding: 0.25rem 0.65rem; text-transform: uppercase; }
+
+  h1.project-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.1; color: var(--ink); margin-bottom: 1rem; }
+  h1.project-title em { font-style: italic; color: var(--accent); }
+  .project-subtitle { font-size: 1.1rem; color: var(--ink-muted); max-width: 600px; margin-bottom: 2.5rem; line-height: 1.7; }
+
+  .project-meta-bar { display: flex; flex-wrap: wrap; gap: 2.5rem; padding: 1.5rem 0; border-top: 1px solid var(--border); }
+  .meta-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.3rem; }
+  .meta-value { font-size: 0.9rem; font-weight: 600; color: var(--ink); }
+
+  .image-hero { background: #0d1117; padding: 3rem 0; border-bottom: 1px solid var(--border); }
+  .image-main { width: 100%; max-height: 580px; object-fit: contain; border-radius: 12px; display: block; margin: 0 auto; }
+  .image-caption { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.4); text-align: center; margin-top: 1rem; letter-spacing: 0.04em; }
+
+  .project-body { padding: 5rem 0; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
+  .section-label::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent); }
+  h2.body-heading { font-family: 'DM Serif Display', serif; font-size: clamp(1.5rem, 3vw, 2rem); color: var(--ink); margin-bottom: 1.2rem; line-height: 1.2; }
+  .body-text p { font-size: 0.97rem; color: var(--ink-muted); line-height: 1.85; margin-bottom: 1.2rem; }
+  .body-text p strong { color: var(--ink); font-weight: 600; }
+
+  /* OPENING QUOTE */
+  .opening-quote {
+    border-left: 3px solid var(--accent);
+    padding: 1.2rem 2rem; margin-bottom: 3rem;
+    background: var(--white); border-radius: 0 10px 10px 0;
+  }
+  .opening-quote blockquote { font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--ink); line-height: 1.5; font-style: italic; margin-bottom: 0.5rem; }
+  .opening-quote cite { font-size: 0.78rem; color: var(--ink-muted); font-family: 'DM Mono', monospace; letter-spacing: 0.05em; }
+
+  /* TOPOLOGY COLOR LEGEND */
+  .legend {
+    display: flex; gap: 1.5rem; flex-wrap: wrap;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.2rem 1.6rem; margin: 2rem 0;
+    align-items: center;
+  }
+  .legend-label { font-size: 0.78rem; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-right: 0.5rem; }
+  .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--ink-muted); }
+  .legend-dot { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+
+  /* STATS ROW */
+  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 2.5rem 0; }
+  @media (max-width: 600px) { .stats-row { grid-template-columns: 1fr; } }
+  .stat-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.4rem 1.6rem; }
+  .stat-value { font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--accent); margin-bottom: 0.3rem; }
+  .stat-label { font-size: 0.8rem; color: var(--ink-muted); }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box { background: var(--ink); color: var(--white); border-radius: 14px; padding: 2.5rem 2.8rem; margin: 3rem 0; }
+  .highlight-box .section-label { color: var(--accent-warm); }
+  .highlight-box .section-label::after { background: var(--accent-warm); }
+  .highlight-box h2 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--white); margin-bottom: 1rem; }
+  .highlight-box p { font-size: 0.97rem; color: rgba(255,255,255,0.72); line-height: 1.85; font-style: italic; }
+
+  .tools-grid { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1rem; }
+  .tool-chip { font-family: 'DM Mono', monospace; font-size: 0.78rem; background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 0.4rem 0.9rem; color: var(--ink); }
+
+  .project-nav { background: var(--white); border-top: 1px solid var(--border); padding: 2.5rem 0; }
+  .project-nav-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .nav-link { display: flex; flex-direction: column; gap: 0.2rem; text-decoration: none; }
+  .nav-link-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); font-family: 'DM Mono', monospace; }
+  .nav-link-title { font-size: 0.95rem; font-weight: 600; color: var(--ink); transition: color 0.2s; }
+  .nav-link:hover .nav-link-title { color: var(--accent); }
+
+  footer { background: var(--ink); padding: 1.5rem 2rem; text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+  .fade-in { animation: fadeUp 0.7s ease both; }
+  .fade-in-2 { animation: fadeUp 0.7s 0.15s ease both; }
+  .fade-in-3 { animation: fadeUp 0.7s 0.3s ease both; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Elizabeth Olayinka</a>
+  <a href="../index.html#work" class="nav-back">← Back to all work</a>
+</nav>
+
+<!-- HERO -->
+<section class="project-hero">
+  <div class="container">
+    <div class="project-tags fade-in">
+      <span class="tag">Generative Design</span>
+      <span class="tag">Topology Optimisation</span>
+      <span class="tag">Mechanical Engineering</span>
+      <span class="tag">SolidWorks</span>
+    </div>
+    <h1 class="project-title fade-in">MorphCore — <em>Topology Study</em></h1>
+    <p class="project-subtitle fade-in-2">An exploration of generative design and topology optimisation — letting algorithms decide where material must stay, and where it can go.</p>
+    <div class="project-meta-bar fade-in-3">
+      <div class="meta-item">
+        <div class="meta-label">Tool</div>
+        <div class="meta-value">SolidWorks Simulation</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Study Type</div>
+        <div class="meta-value">Topology Optimisation</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Calculated Mass</div>
+        <div class="meta-value">2.089 kg</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Focus</div>
+        <div class="meta-value">Weight · Strength · Material Reduction</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE -->
+<div class="image-hero">
+  <div class="wide-container">
+    <img src="../topology-study.png" alt="MorphCore Topology Optimisation Study — SolidWorks" class="image-main"/>
+    <p class="image-caption">Topology Study 1 (Default) — Material Mass plot. Yellow = Must Keep · Blue/Purple = Ok to Remove · Calculated Element Mass: 2.08894 kg</p>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="project-body">
+  <div class="container">
+
+    <!-- OPENING QUOTE -->
+    <div class="opening-quote">
+      <blockquote>"Any sufficiently advanced technology is indistinguishable from magic."</blockquote>
+      <cite>— Arthur C. Clarke</cite>
+    </div>
+
+    <!-- WHAT IS THIS -->
+    <div class="section-label">The Exploration</div>
+    <h2 class="body-heading">When algorithms design better than intuition alone</h2>
+    <div class="body-text">
+      <p>Generative design had always felt distant — almost like science fiction. The idea that a computer could explore <strong>thousands of design permutations simultaneously</strong>, optimising for strength, weight, material usage, and manufacturing constraints, felt too abstract to be practical.</p>
+      <p>This project was the moment that changed. Running a <strong>topology optimisation study in SolidWorks Simulation</strong>, the software analysed the component under defined load conditions and identified exactly which regions of material are structurally essential — and which can be safely removed without compromising performance.</p>
+    </div>
+
+    <!-- LEGEND -->
+    <div class="legend">
+      <span class="legend-label">Material Map:</span>
+      <div class="legend-item"><div class="legend-dot" style="background:#f5e642;"></div> Must Keep — critical load-bearing material</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#00e5ff;"></div> Marginal — review under constraints</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#5b0daa;"></div> Ok to Remove — non-structural, safe to eliminate</div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value">2.089<span style="font-size:1rem;"> kg</span></div>
+        <div class="stat-label">Calculated element mass</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">1000s</div>
+        <div class="stat-label">Design permutations explored by the algorithm</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">~60<span style="font-size:1rem;">%</span></div>
+        <div class="stat-label">Estimated removable material identified</div>
+      </div>
+    </div>
+
+    <!-- PROCESS -->
+    <div style="margin-top:2rem;">
+      <div class="section-label">What I Learned</div>
+      <h2 class="body-heading">Speaking the language of machines</h2>
+      <div class="body-text">
+        <p>The study begins by defining the <strong>design space</strong> — the maximum volume the part could occupy — along with the load cases, constraints, and manufacturing goals. The algorithm then iteratively removes material from regions that contribute least to structural performance, converging on a geometry that a human designer would rarely arrive at intuitively.</p>
+        <p>What makes topology optimisation genuinely powerful is that it <strong>removes designer bias</strong>. There are no assumptions about what the part should look like — only constraints about how it must perform. The result is often organic, almost biological-looking geometry that is simultaneously lighter and stronger than conventional designs.</p>
+        <p>I am still early in this journey — understanding processes, making mistakes, learning to interpret simulation outputs and translate them into manufacturable designs. But that is exactly how you build real competence. <strong>Step by step.</strong></p>
+      </div>
+    </div>
+
+    <!-- REFLECTION -->
+    <div class="highlight-box">
+      <div class="section-label">Reflection</div>
+      <h2>It felt like magic. Then it felt like engineering.</h2>
+      <p>"I have known about generative design for a while, but it always felt far-fetched. Almost like sci-fi. But I finally started exploring it properly. And yes — it is feeling like magic. Watching algorithms explore thousands of design permutations optimizing for strength, weight, material, and manufacturing constraints. I'm still early in my journey. Understanding processes. Making mistakes. Learning to speak the language of machines and manufacturing. But step by step, that's how you forge a path."</p>
+    </div>
+
+    <!-- TOOLS -->
+    <div style="margin-top:3rem; padding-top:3rem; border-top:1px solid var(--border);">
+      <div class="section-label">Tools & Technologies</div>
+      <div class="tools-grid">
+        <span class="tool-chip">SolidWorks Simulation</span>
+        <span class="tool-chip">Topology Optimisation</span>
+        <span class="tool-chip">Generative Design</span>
+        <span class="tool-chip">FEA (Finite Element Analysis)</span>
+        <span class="tool-chip">Material Mass Analysis</span>
+        <span class="tool-chip">Load Case Definition</span>
+        <span class="tool-chip">Design for Lightweighting</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PROJECT NAV -->
+<div class="project-nav">
+  <div class="container">
+    <div class="project-nav-inner">
+      <a href="headphone-stand.html" class="nav-link">
+        <span class="nav-link-label">← Previous</span>
+        <span class="nav-link-title">EquiRest Pro — Headphone Stand</span>
+      </a>
+      <a href="../index.html#contact" class="nav-link" style="text-align:right;">
+        <span class="nav-link-label">Interested?</span>
+        <span class="nav-link-title">Get in Touch →</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 Elizabeth Olayinka — Built with purpose.</footer>
+</body>
+</html>

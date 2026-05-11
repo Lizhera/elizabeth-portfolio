@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FlushPoint — Elizabeth Olayinka</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #F7F5F0; --surface: #EFECE5; --ink: #1A1714;
+    --ink-muted: #6B6560; --accent: #C0392B; --accent-warm: #E8734A;
+    --accent-light: #F9EDE8; --border: #DDD9D0; --white: #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(247,245,240,0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+  .nav-back { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; color: var(--ink-muted); transition: color 0.2s; }
+  .nav-back:hover { color: var(--accent); }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+  /* HERO */
+  .project-hero {
+    padding: 9rem 0 4rem;
+    background: #0d0d0d;
+    position: relative; overflow: hidden;
+  }
+  .project-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 50% 60% at 20% 50%, rgba(100,180,255,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 50% at 80% 30%, rgba(192,57,43,0.1) 0%, transparent 70%);
+  }
+  .project-hero .container { position: relative; z-index: 1; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.05em; background: rgba(192,57,43,0.2); color: #e8826e; border-radius: 4px; padding: 0.25rem 0.65rem; border: 1px solid rgba(192,57,43,0.3); }
+  .project-hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 6vw, 4rem); color: var(--white); line-height: 1.1; margin-bottom: 1rem; }
+  .project-hero h1 em { font-style: italic; color: #64b4ff; }
+  .project-hero p { font-size: 1.05rem; color: rgba(255,255,255,0.6); max-width: 600px; line-height: 1.8; }
+  .hero-meta-row { display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
+  .hero-meta-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0.3rem; }
+  .hero-meta-value { font-size: 0.9rem; color: rgba(255,255,255,0.75); font-weight: 500; }
+
+  /* VIDEO BLOCK */
+  .video-block {
+    background: #0a0a0a;
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .video-wrapper {
+    max-width: 860px; margin: 0 auto; padding: 0 2rem;
+    border-radius: 12px; overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+  }
+  .video-wrapper video {
+    width: 100%; display: block; border-radius: 12px;
+    background: #000;
+  }
+
+  /* CONTENT */
+  .project-content { padding: 5rem 0; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
+  .section-label::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent); }
+  h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--ink); margin-bottom: 1.2rem; line-height: 1.2; }
+  p { color: var(--ink-muted); font-size: 0.97rem; line-height: 1.85; margin-bottom: 1.2rem; }
+  p strong { color: var(--ink); font-weight: 600; }
+
+  /* SCENE BREAKDOWN */
+  .scene-list { display: flex; flex-direction: column; gap: 1rem; margin: 2rem 0; }
+  .scene-item {
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.2rem 1.4rem;
+  }
+  .scene-number {
+    font-family: 'DM Mono', monospace; font-size: 0.8rem;
+    color: var(--white); background: var(--accent);
+    border-radius: 50%; width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-weight: 700;
+  }
+  .scene-text h3 { font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-bottom: 0.3rem; }
+  .scene-text p { font-size: 0.82rem; color: var(--ink-muted); margin: 0; line-height: 1.6; }
+
+  /* STATS */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 2.5rem 0; }
+  @media (max-width: 600px) { .stats-row { grid-template-columns: 1fr 1fr; } }
+  .stat-card { background: var(--surface); border-radius: 10px; padding: 1.2rem; text-align: center; }
+  .stat-value { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--accent); margin-bottom: 0.2rem; }
+  .stat-label { font-size: 0.73rem; color: var(--ink-muted); font-weight: 500; }
+
+  /* QUOTE */
+  .quote-block {
+    background: var(--ink); border-radius: 12px;
+    padding: 2.5rem; margin: 2.5rem 0;
+    position: relative; overflow: hidden;
+  }
+  .quote-block::before { content: '"'; position: absolute; top: -0.5rem; left: 1.5rem; font-family: 'DM Serif Display', serif; font-size: 8rem; color: rgba(255,255,255,0.05); line-height: 1; }
+  .quote-block p { color: rgba(255,255,255,0.75); font-size: 1rem; line-height: 1.8; font-style: italic; margin: 0; position: relative; z-index: 1; }
+
+  /* TOOLS */
+  .tools-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .tool-tag { font-size: 0.78rem; font-weight: 500; background: var(--accent-light); color: var(--accent); border-radius: 4px; padding: 0.3rem 0.7rem; border: 1px solid rgba(192,57,43,0.15); }
+
+  /* NAV */
+  .project-nav { background: var(--surface); border-top: 1px solid var(--border); padding: 2.5rem 0; }
+  .project-nav .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .project-nav a { text-decoration: none; color: var(--ink); font-weight: 500; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s; }
+  .project-nav a:hover { color: var(--accent); }
+  .project-nav .nav-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); margin-bottom: 0.3rem; font-family: 'DM Mono', monospace; }
+
+  footer { background: var(--ink); padding: 1.5rem 2rem; text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Elizabeth Olayinka</a>
+  <a href="../index.html#work" class="nav-back">← Back to Work</a>
+</nav>
+
+<!-- HERO -->
+<section class="project-hero">
+  <div class="container">
+    <div class="hero-tags">
+      <span class="tag">Video Editing</span>
+      <span class="tag">DaVinci Resolve</span>
+      <span class="tag">Sci-Fi Short</span>
+      <span class="tag">Post-Production</span>
+    </div>
+    <h1>FlushPoint —<br/><em>The Alien in the Drain</em></h1>
+    <p>A short comedic sci-fi edit — a girl accidentally flushes an alien down the toilet, her brother investigates, and catches just a glimpse of blue feathers disappearing into the drain. Edited in DaVinci Resolve as a demonstration of narrative pacing, cut timing, and visual storytelling.</p>
+    <div class="hero-meta-row">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Year</div>
+        <div class="hero-meta-value">2026</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Tool</div>
+        <div class="hero-meta-value">DaVinci Resolve</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Type</div>
+        <div class="hero-meta-value">Short Narrative Edit</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Genre</div>
+        <div class="hero-meta-value">Comedic Sci-Fi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<div class="video-block">
+  <div class="video-wrapper">
+    <video controls preload="metadata">
+      <source src="../flush-edit.mp4" type="video/mp4"/>
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<section class="project-content">
+  <div class="container">
+
+    <div class="section-label">The Edit</div>
+    <h2>Storytelling in under<br/>60 seconds.</h2>
+    <p>FlushPoint is a short comedic sci-fi narrative edit — built to demonstrate the core skills of video post-production: <strong>narrative pacing</strong>, <strong>cut timing</strong>, <strong>audio-visual sync</strong>, and the ability to build tension and release it with a punchline reveal. The challenge was to tell a complete story — setup, conflict, and payoff — within a very short runtime.</p>
+    <p>The edit was produced entirely in <strong>DaVinci Resolve</strong>, covering the full post-production pipeline from rough assembly cut through to colour grade, audio mix, and final export. The tools used are fully transferable to OpenShot, Shotcut, and CapCut for platform-agnostic delivery.</p>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value">1</div>
+        <div class="stat-label">Complete Story Arc</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">3</div>
+        <div class="stat-label">Key Scenes</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">DaVinci</div>
+        <div class="stat-label">Editing Platform</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">💙</div>
+        <div class="stat-label">Blue Alien Feather</div>
+      </div>
+    </div>
+
+    <!-- SCENE BREAKDOWN -->
+    <div class="section-label" style="margin-top:3rem;">Scene Breakdown</div>
+    <h2>Three beats. One story.</h2>
+    <div class="scene-list">
+      <div class="scene-item">
+        <div class="scene-number">1</div>
+        <div class="scene-text">
+          <h3>The Incident — Girl in the bathroom</h3>
+          <p>Our protagonist accidentally flushes something she shouldn't have — an alien that had been hiding in the toilet. The scene is played for comedic panic, with the flush as the point of no return.</p>
+        </div>
+      </div>
+      <div class="scene-item">
+        <div class="scene-number">2</div>
+        <div class="scene-text">
+          <h3>The Investigation — Brother enters</h3>
+          <p>Her brother walks into the bathroom looking for the alien. The tension builds as he searches — checking behind the door, scanning the room, opening the closet with growing suspicion.</p>
+        </div>
+      </div>
+      <div class="scene-item">
+        <div class="scene-number">3</div>
+        <div class="scene-text">
+          <h3>The Reveal — Blue feathers in the drain</h3>
+          <p>The punchline: a glimpse of vivid blue alien feathers slowly disappearing down the drain. The alien is gone. The brother is too late. Cut to black.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUOTE -->
+    <div class="quote-block">
+      <p>Good editing is invisible — you only notice it when it's bad. The goal with FlushPoint was to make every cut feel inevitable, every beat land at exactly the right moment, and let the blue feather do all the storytelling work at the end.</p>
+    </div>
+
+    <!-- TOOLS -->
+    <div class="section-label" style="margin-top:3rem;">Tools Used</div>
+    <div class="tools-row">
+      <span class="tool-tag">DaVinci Resolve</span>
+      <span class="tool-tag">Video Editing</span>
+      <span class="tool-tag">Narrative Pacing</span>
+      <span class="tool-tag">Cut Timing</span>
+      <span class="tool-tag">Audio-Visual Sync</span>
+      <span class="tool-tag">Colour Grading</span>
+      <span class="tool-tag">Post-Production</span>
+      <span class="tool-tag">Short-Form Storytelling</span>
+    </div>
+
+    <p style="margin-top:1.5rem;font-size:0.85rem;">
+      <em>Also proficient in OpenShot, Shotcut, and CapCut for platform-flexible video delivery.</em>
+    </p>
+
+  </div>
+</section>
+
+<!-- PROJECT NAV -->
+<div class="project-nav">
+  <div class="container">
+    <div>
+      <div class="nav-label">Previous Project</div>
+      <a href="headphone-stand.html">← EquiRest Pro — Headphone Stand</a>
+    </div>
+    <div style="text-align:right;">
+      <div class="nav-label">Back to</div>
+      <a href="../index.html#work">All Projects →</a>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 Elizabeth Olayinka — Built with purpose.</footer>
+
+</body>
+</html>

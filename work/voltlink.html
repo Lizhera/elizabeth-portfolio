@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VoltLink — Elizabeth Olayinka</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #F7F5F0; --surface: #EFECE5; --ink: #1A1714;
+    --ink-muted: #6B6560; --accent: #C0392B; --accent-warm: #E8734A;
+    --accent-light: #F9EDE8; --border: #DDD9D0; --white: #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(247,245,240,0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+  .nav-back { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; color: var(--ink-muted); transition: color 0.2s; }
+  .nav-back:hover { color: var(--accent); }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+  /* HERO */
+  .project-hero {
+    padding: 9rem 0 4rem;
+    background: var(--ink);
+    position: relative; overflow: hidden;
+  }
+  .project-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(192,57,43,0.15) 0%, transparent 70%);
+  }
+  .project-hero .container { position: relative; z-index: 1; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .tag {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.05em;
+    background: rgba(192,57,43,0.2); color: #e8826e;
+    border-radius: 4px; padding: 0.25rem 0.65rem; border: 1px solid rgba(192,57,43,0.3);
+  }
+  .project-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--white); line-height: 1.1; margin-bottom: 1rem;
+  }
+  .project-hero h1 em { font-style: italic; color: #e8826e; }
+  .project-hero p {
+    font-size: 1.05rem; color: rgba(255,255,255,0.6);
+    max-width: 600px; line-height: 1.8;
+  }
+  .hero-meta-row {
+    display: flex; flex-wrap: wrap; gap: 2rem;
+    margin-top: 2.5rem; padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero-meta-item { }
+  .hero-meta-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0.3rem; }
+  .hero-meta-value { font-size: 0.9rem; color: rgba(255,255,255,0.75); font-weight: 500; }
+
+  /* MAIN IMAGE */
+  .main-image-block {
+    background: #0a0a0a;
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .main-image-block img {
+    width: 100%; max-width: 860px; margin: 0 auto; display: block;
+    border-radius: 8px; box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+  }
+
+  /* CONTENT */
+  .project-content { padding: 5rem 0; }
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem;
+  }
+  .section-label::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent); }
+  h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--ink); margin-bottom: 1.2rem; line-height: 1.2; }
+  p { color: var(--ink-muted); font-size: 0.97rem; line-height: 1.85; margin-bottom: 1.2rem; }
+  p strong { color: var(--ink); font-weight: 600; }
+
+  /* SUBSYSTEMS */
+  .subsystem-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2rem; margin: 2.5rem 0; }
+  @media (max-width: 700px) { .subsystem-grid { grid-template-columns: 1fr; } }
+  .subsystem-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.4rem 1.5rem;
+    border-top: 3px solid var(--accent);
+  }
+  .subsystem-card h3 { font-size: 0.9rem; font-weight: 700; color: var(--ink); margin-bottom: 0.8rem; }
+  .subsystem-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+  .subsystem-card ul li { font-size: 0.8rem; color: var(--ink-muted); padding-left: 1rem; position: relative; line-height: 1.5; }
+  .subsystem-card ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; top: 0.15rem; }
+
+  /* STATS */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 2.5rem 0; }
+  @media (max-width: 600px) { .stats-row { grid-template-columns: 1fr 1fr; } }
+  .stat-card { background: var(--surface); border-radius: 10px; padding: 1.2rem; text-align: center; }
+  .stat-value { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--accent); margin-bottom: 0.2rem; }
+  .stat-label { font-size: 0.73rem; color: var(--ink-muted); font-weight: 500; letter-spacing: 0.03em; }
+
+  /* SCHEMATIC IMAGES */
+  .schematic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2.5rem 0; }
+  @media (max-width: 600px) { .schematic-grid { grid-template-columns: 1fr; } }
+  .schematic-item img { width: 100%; border-radius: 8px; border: 1px solid var(--border); background: #f9f7f4; }
+  .schematic-caption { font-size: 0.77rem; color: var(--ink-muted); font-family: 'DM Mono', monospace; margin-top: 0.6rem; text-align: center; }
+
+  /* TOOLS */
+  .tools-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .tool-tag {
+    font-size: 0.78rem; font-weight: 500;
+    background: var(--accent-light); color: var(--accent);
+    border-radius: 4px; padding: 0.3rem 0.7rem;
+    border: 1px solid rgba(192,57,43,0.15);
+  }
+
+  /* NAV BETWEEN PROJECTS */
+  .project-nav {
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 2.5rem 0;
+  }
+  .project-nav .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .project-nav a { text-decoration: none; color: var(--ink); font-weight: 500; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s; }
+  .project-nav a:hover { color: var(--accent); }
+  .project-nav .nav-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); margin-bottom: 0.3rem; font-family: 'DM Mono', monospace; }
+
+  footer { background: var(--ink); padding: 1.5rem 2rem; text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Elizabeth Olayinka</a>
+  <a href="../index.html#work" class="nav-back">← Back to Work</a>
+</nav>
+
+<!-- HERO -->
+<section class="project-hero">
+  <div class="container">
+    <div class="hero-tags">
+      <span class="tag">Electronics Design</span>
+      <span class="tag">PCB Layout</span>
+      <span class="tag">Power Electronics</span>
+      <span class="tag">KiCad</span>
+      <span class="tag">Schematic Capture</span>
+    </div>
+    <h1>VoltLink —<br/><em>Laptop-Grade Power Bank</em></h1>
+    <p>A fully designed laptop-grade power bank system — engineered from schematic capture through PCB layout, integrating a flyback switching charger, push-pull inverter, and short-circuit protection into one complete electronics project.</p>
+    <div class="hero-meta-row">
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Year</div>
+        <div class="hero-meta-value">2025</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Type</div>
+        <div class="hero-meta-value">Independent Research Project</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Tools</div>
+        <div class="hero-meta-value">KiCad · Schematic Capture · PCB Layout</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-label">Output</div>
+        <div class="hero-meta-value">220V regulated DC output</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN IMAGE — PCB -->
+<div class="main-image-block">
+  <div class="container">
+    <img src="voltlink-pcb.jpg" alt="VoltLink PCB layout routed in KiCad — black board with white copper traces"/>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<section class="project-content">
+  <div class="container">
+
+    <div class="section-label">Overview</div>
+    <h2>From schematic to routed board —<br/>a complete power system.</h2>
+    <p>VoltLink is a laptop-grade power bank designed entirely in KiCad — from schematic capture through to a fully routed PCB. The system delivers regulated high-voltage DC output capable of powering laptop-class devices, with a complete charging, conversion, and protection stack built from discrete components and industry-standard ICs.</p>
+    <p>The project spans three interconnected design documents: a <strong>flyback switching charger</strong>, a <strong>push-pull inverter with transformer isolation</strong>, and a <strong>NE555-based short-circuit protection circuit</strong> with audible and visual fault indicators — all routed onto a single production-ready PCB.</p>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value">220V</div>
+        <div class="stat-label">Regulated Output</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">3</div>
+        <div class="stat-label">Subsystems Designed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">2×</div>
+        <div class="stat-label">IRF3205 MOSFETs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">KiCad</div>
+        <div class="stat-label">Design Platform</div>
+      </div>
+    </div>
+
+    <!-- SUBSYSTEMS -->
+    <div class="section-label" style="margin-top:3rem;">Architecture</div>
+    <h2>Three subsystems. One complete system.</h2>
+    <div class="subsystem-grid">
+      <div class="subsystem-card">
+        <h3>⚡ Switching Charger</h3>
+        <ul>
+          <li>UC3843 PWM flyback controller</li>
+          <li>PQ3230 power transistor + heatsink</li>
+          <li>GBU4K full-bridge rectifier</li>
+          <li>NTC thermistor thermal protection</li>
+          <li>PC817 optocoupler feedback</li>
+          <li>TL431 precision voltage reference</li>
+          <li>Fuse + ferrite bead EMI filtering</li>
+        </ul>
+      </div>
+      <div class="subsystem-card">
+        <h3>🔋 Push-Pull Inverter</h3>
+        <ul>
+          <li>SG3525 PWM inverter controller</li>
+          <li>Dual IRF3205 power MOSFETs</li>
+          <li>Centre-tapped transformer isolation</li>
+          <li>1N5408 full-bridge rectification</li>
+          <li>2200µF bulk output capacitors</li>
+          <li>Heatsink-mounted switching devices</li>
+          <li>220V regulated DC output</li>
+        </ul>
+      </div>
+      <div class="subsystem-card">
+        <h3>🛡️ Protection Circuit</h3>
+        <ul>
+          <li>NE555D timer-based fault latch</li>
+          <li>PC817 optocoupler fault signalling</li>
+          <li>Buzzer (BZ1) audible alert</li>
+          <li>LED visual status indicator</li>
+          <li>SB050 transistor latch control</li>
+          <li>1N4148 fast-switching diodes</li>
+          <li>Ferrite bead noise suppression</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SCHEMATICS -->
+    <div class="section-label" style="margin-top:3rem;">Schematics</div>
+    <h2>Full schematic documentation.</h2>
+    <p>The complete system was captured across two schematic sheets — the charger input and the inverter/protection output — before being consolidated into a single routed PCB layout in KiCad.</p>
+    <div class="schematic-grid">
+      <div class="schematic-item">
+        <img src="voltlink-charger.jpg" alt="VoltLink charger schematic — UC3843 flyback circuit with feedback and thermal protection"/>
+        <div class="schematic-caption">Charger schematic — UC3843 flyback topology with TL431 feedback</div>
+      </div>
+      <div class="schematic-item">
+        <img src="voltlink-powerbank.jpg" alt="VoltLink main inverter circuit and short-circuit protection schematic"/>
+        <div class="schematic-caption">Inverter + short-circuit protection — SG3525 push-pull with NE555D latch</div>
+      </div>
+    </div>
+
+    <!-- PCB DESIGN NOTES -->
+    <div class="section-label" style="margin-top:3rem;">PCB Design</div>
+    <h2>Layout considerations for high-power operation.</h2>
+    <p>The PCB layout was routed in KiCad with particular attention to the constraints of high-power, high-voltage operation. <strong>High-current trace widths</strong> were calculated for the power stage to handle sustained load currents without excessive heating. <strong>Thermal relief</strong> patterns were applied to through-hole pads on heat-generating components. <strong>Clearance distances</strong> between high-voltage and low-voltage sections meet standard creepage requirements for safe operation at 220V output levels.</p>
+    <p>Component placement prioritised short, low-inductance paths for the switching loop — minimising EMI and switching losses — while keeping the control and feedback circuitry separated from the noisy power stage.</p>
+
+    <!-- TOOLS -->
+    <div class="section-label" style="margin-top:3rem;">Tools Used</div>
+    <div class="tools-row">
+      <span class="tool-tag">KiCad 9.0</span>
+      <span class="tool-tag">Schematic Capture</span>
+      <span class="tool-tag">PCB Layout & Routing</span>
+      <span class="tool-tag">Power Electronics</span>
+      <span class="tool-tag">Flyback Converter Design</span>
+      <span class="tool-tag">Push-Pull Inverter</span>
+      <span class="tool-tag">High-Voltage Design</span>
+      <span class="tool-tag">Protection Circuit Design</span>
+      <span class="tool-tag">DRC Validation</span>
+      <span class="tool-tag">Thermal Analysis</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECT NAV -->
+<div class="project-nav">
+  <div class="container">
+    <div>
+      <div class="nav-label">Next Project</div>
+      <a href="shredcore.html">ShredCore Tabletop — Plastic Shredder →</a>
+    </div>
+    <div style="text-align:right;">
+      <div class="nav-label">Back to</div>
+      <a href="../index.html#work">← All Projects</a>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 Elizabeth Olayinka — Built with purpose.</footer>
+
+</body>
+</html>
