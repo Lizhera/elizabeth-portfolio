@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ShredCore Tabletop — Elizabeth Olayinka</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #F7F5F0;
+    --surface: #EFECE5;
+    --ink: #1A1714;
+    --ink-muted: #6B6560;
+    --accent: #C0392B;
+    --accent-warm: #E8734A;
+    --accent-light: #F9EDE8;
+    --border: #DDD9D0;
+    --white: #FFFFFF;
+    --blue: #1a3a8f;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(247,245,240,0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+  .nav-back { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; font-weight: 500; color: var(--ink-muted); text-decoration: none; transition: color 0.2s; }
+  .nav-back:hover { color: var(--accent); }
+
+  .project-hero { padding: 8rem 0 4rem; background: var(--white); border-bottom: 1px solid var(--border); }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+  .wide-container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.05em; background: var(--accent-light); color: var(--accent); border-radius: 4px; padding: 0.25rem 0.65rem; text-transform: uppercase; }
+
+  h1.project-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.1; color: var(--ink); margin-bottom: 1rem; }
+  h1.project-title em { font-style: italic; color: var(--accent); }
+  .project-subtitle { font-size: 1.1rem; color: var(--ink-muted); max-width: 620px; margin-bottom: 2.5rem; line-height: 1.7; }
+
+  .project-meta-bar { display: flex; flex-wrap: wrap; gap: 2.5rem; padding: 1.5rem 0; border-top: 1px solid var(--border); }
+  .meta-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.3rem; }
+  .meta-value { font-size: 0.9rem; font-weight: 600; color: var(--ink); }
+
+  /* HERO IMAGE — large single */
+  .image-hero { background: #f0f4ff; padding: 3rem 0; border-bottom: 1px solid var(--border); }
+  .image-main { width: 100%; max-height: 580px; object-fit: contain; border-radius: 12px; display: block; margin: 0 auto; }
+  .image-caption { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--ink-muted); text-align: center; margin-top: 1rem; letter-spacing: 0.04em; }
+
+  /* 3-IMAGE GALLERY */
+  .gallery { background: var(--surface); padding: 3rem 0; border-bottom: 1px solid var(--border); }
+  .gallery-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2rem; }
+  @media (max-width: 680px) { .gallery-grid { grid-template-columns: 1fr; } }
+  .gallery-item { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: #f0f4ff; }
+  .gallery-item img { width: 100%; aspect-ratio: 3/4; object-fit: contain; display: block; padding: 0.5rem; }
+  .gallery-item-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(26,26,20,0.75); padding: 0.5rem 0.8rem; font-family: 'DM Mono', monospace; font-size: 0.68rem; color: rgba(255,255,255,0.8); letter-spacing: 0.04em; }
+
+  /* BODY */
+  .project-body { padding: 5rem 0; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
+  .section-label::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent); }
+  h2.body-heading { font-family: 'DM Serif Display', serif; font-size: clamp(1.5rem, 3vw, 2rem); color: var(--ink); margin-bottom: 1.2rem; line-height: 1.2; }
+  .body-text p { font-size: 0.97rem; color: var(--ink-muted); line-height: 1.85; margin-bottom: 1.2rem; }
+  .body-text p strong { color: var(--ink); font-weight: 600; }
+
+  /* COMPONENT BREAKDOWN */
+  .components { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  @media (max-width: 600px) { .components { grid-template-columns: 1fr; } }
+  .component-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.3rem 1.5rem; }
+  .component-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .component-name { font-weight: 600; font-size: 0.9rem; color: var(--ink); margin-bottom: 0.3rem; }
+  .component-desc { font-size: 0.8rem; color: var(--ink-muted); line-height: 1.6; }
+
+  /* IMPACT BANNER */
+  .impact-banner {
+    background: linear-gradient(135deg, #1a3a8f 0%, #0d1f52 100%);
+    border-radius: 14px; padding: 2.5rem 2.8rem; margin: 3rem 0;
+    color: white;
+  }
+  .impact-banner .section-label { color: #7eb3ff; }
+  .impact-banner .section-label::after { background: #7eb3ff; }
+  .impact-banner h2 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--white); margin-bottom: 1.2rem; }
+  .impact-stats { display: flex; gap: 3rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .impact-stat-value { font-family: 'DM Serif Display', serif; font-size: 2rem; color: #7eb3ff; }
+  .impact-stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-top: 0.2rem; }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box { background: var(--ink); color: var(--white); border-radius: 14px; padding: 2.5rem 2.8rem; margin: 3rem 0; }
+  .highlight-box .section-label { color: var(--accent-warm); }
+  .highlight-box .section-label::after { background: var(--accent-warm); }
+  .highlight-box h2 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--white); margin-bottom: 1rem; }
+  .highlight-box p { font-size: 0.97rem; color: rgba(255,255,255,0.72); line-height: 1.85; font-style: italic; }
+
+  .tools-grid { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1rem; }
+  .tool-chip { font-family: 'DM Mono', monospace; font-size: 0.78rem; background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 0.4rem 0.9rem; color: var(--ink); }
+
+  .project-nav { background: var(--white); border-top: 1px solid var(--border); padding: 2.5rem 0; }
+  .project-nav-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .nav-link { display: flex; flex-direction: column; gap: 0.2rem; text-decoration: none; }
+  .nav-link-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); font-family: 'DM Mono', monospace; }
+  .nav-link-title { font-size: 0.95rem; font-weight: 600; color: var(--ink); transition: color 0.2s; }
+  .nav-link:hover .nav-link-title { color: var(--accent); }
+
+  footer { background: var(--ink); padding: 1.5rem 2rem; text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+  .fade-in { animation: fadeUp 0.7s ease both; }
+  .fade-in-2 { animation: fadeUp 0.7s 0.15s ease both; }
+  .fade-in-3 { animation: fadeUp 0.7s 0.3s ease both; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Elizabeth Olayinka</a>
+  <a href="../index.html#work" class="nav-back">← Back to all work</a>
+</nav>
+
+<!-- HERO -->
+<section class="project-hero">
+  <div class="container">
+    <div class="project-tags fade-in">
+      <span class="tag">CAD Design</span>
+      <span class="tag">Mechanical Engineering</span>
+      <span class="tag">Sustainability</span>
+      <span class="tag">SolidWorks</span>
+      <span class="tag">Assembly Design</span>
+    </div>
+    <h1 class="project-title fade-in">ShredCore <em>Tabletop</em></h1>
+    <p class="project-subtitle fade-in-2">A fully modelled tabletop plastic shredder — designed to make plastic waste recycling accessible, compact, and practical at the small-scale workshop level.</p>
+    <div class="project-meta-bar fade-in-3">
+      <div class="meta-item">
+        <div class="meta-label">Tool</div>
+        <div class="meta-value">SolidWorks</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Type</div>
+        <div class="meta-value">Full Assembly CAD</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Category</div>
+        <div class="meta-value">Industrial · Sustainability</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Deliverable</div>
+        <div class="meta-value">Multi-view 3D Assembly</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HERO IMAGE -->
+<div class="image-hero">
+  <div class="wide-container">
+    <img src="../shredder-1.png" alt="ShredCore Tabletop — isometric assembly view" class="image-main"/>
+    <p class="image-caption">ShredCore Tabletop — Full assembly isometric view showing shredding chamber, drive system, and collection bin</p>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery">
+  <div class="wide-container">
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="../shredder-2.png" alt="Front elevation view with hopper"/>
+        <div class="gallery-item-label">Front elevation — hopper & motor housing</div>
+      </div>
+      <div class="gallery-item">
+        <img src="../shredder-3.png" alt="Top view showing shredding chamber internals"/>
+        <div class="gallery-item-label">Overhead view — chamber & acrylic cover detail</div>
+      </div>
+      <div class="gallery-item">
+        <img src="../shredder-4.png" alt="Clean side elevation — enclosure view"/>
+        <div class="gallery-item-label">Side elevation — full enclosure, clean view</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="project-body">
+  <div class="container">
+
+    <div class="section-label">The Problem</div>
+    <h2 class="body-heading">Plastic waste doesn't have to be a dead end</h2>
+    <div class="body-text">
+      <p>Small workshops, makerspaces, and sustainability-focused creators generate significant plastic waste — failed prints, off-cuts, scrap material — with no practical way to process it on-site. Industrial shredders are too large and too expensive. The gap between "I want to recycle this" and "I have the equipment to do it" is enormous.</p>
+      <p><strong>ShredCore Tabletop</strong> was designed to close that gap — a compact, motor-driven plastic shredder that fits on a workbench and is manufacturable from standard steel sections, off-the-shelf fasteners, and a single-phase motor.</p>
+    </div>
+
+    <!-- COMPONENT BREAKDOWN -->
+    <div style="margin-top: 2.5rem;">
+      <div class="section-label">System Breakdown</div>
+      <h2 class="body-heading">Every component designed with purpose</h2>
+      <div class="components">
+        <div class="component-card">
+          <div class="component-icon">🔩</div>
+          <div class="component-name">Shredding Chamber</div>
+          <div class="component-desc">Dual-shaft counter-rotating blade assembly enclosed in a bolted steel housing. Blades are designed for interchangeability and easy replacement.</div>
+        </div>
+        <div class="component-card">
+          <div class="component-icon">📥</div>
+          <div class="component-name">Angled Feed Hopper</div>
+          <div class="component-desc">Offset-angle hopper guides material safely into the cutting zone while preventing jamming and keeping hands clear of the blades.</div>
+        </div>
+        <div class="component-card">
+          <div class="component-icon">⚙️</div>
+          <div class="component-name">Belt & Pulley Drive</div>
+          <div class="component-desc">Motor torque transmitted via a V-belt and dual-pulley system — providing mechanical advantage, vibration damping, and easy speed ratio adjustment.</div>
+        </div>
+        <div class="component-card">
+          <div class="component-icon">📦</div>
+          <div class="component-name">Removable Collection Bin</div>
+          <div class="component-desc">Shredded plastic falls directly into a slide-out steel bin housed within the base frame — making collection clean, fast, and tool-free.</div>
+        </div>
+        <div class="component-card">
+          <div class="component-icon">🔲</div>
+          <div class="component-name">Acrylic Inspection Cover</div>
+          <div class="component-desc">Transparent acrylic panel over the shredding chamber allows real-time monitoring of feed material and blade performance without opening the machine.</div>
+        </div>
+        <div class="component-card">
+          <div class="component-icon">🏗️</div>
+          <div class="component-name">Welded Steel Frame</div>
+          <div class="component-desc">Structural base frame built from standard steel sections with levelling feet — designed for rigidity under dynamic shredding loads.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMPACT BANNER -->
+    <div class="impact-banner">
+      <div class="section-label">Why It Matters</div>
+      <h2>Designed for the circular economy.</h2>
+      <p style="color:rgba(255,255,255,0.7);font-size:0.95rem;line-height:1.8;">This machine is part of a broader vision — one where small-scale makers and workshops can close the loop on their own plastic waste, shredding it back into raw feedstock for reuse in injection moulding or filament extrusion. The design prioritises repairability, standard components, and ease of manufacture.</p>
+      <div class="impact-stats">
+        <div>
+          <div class="impact-stat-value">Tabletop</div>
+          <div class="impact-stat-label">Form factor — fits on a standard workbench</div>
+        </div>
+        <div>
+          <div class="impact-stat-value">4 Views</div>
+          <div class="impact-stat-label">Full multi-angle assembly documentation</div>
+        </div>
+        <div>
+          <div class="impact-stat-value">6+</div>
+          <div class="impact-stat-label">Discrete sub-assemblies designed</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESIGN PROCESS -->
+    <div>
+      <div class="section-label">Design Process</div>
+      <h2 class="body-heading">From blank canvas to full assembly</h2>
+      <div class="body-text">
+        <p>The design process began with defining the core mechanical requirement: a shredding mechanism capable of processing common thermoplastics like PET, HDPE, and ABS. The <strong>dual-shaft counter-rotating blade system</strong> was selected for its proven effectiveness and relatively simple mechanical arrangement.</p>
+        <p>Each sub-assembly was modelled separately in SolidWorks and then brought together in a <strong>top-level assembly</strong> with full mate relationships, ensuring every component fits together as it would in fabrication. Special attention was paid to the drive system — the belt and pulley arrangement was sized to deliver adequate torque at the blade shaft while keeping the motor within a practical power range.</p>
+        <p>The <strong>removable collection bin and acrylic inspection cover</strong> reflect a user-centred approach — the machine needs to be practical to operate, not just functional in principle. Both features were added after thinking through how someone would actually use this day-to-day in a workshop environment.</p>
+      </div>
+    </div>
+
+    <!-- REFLECTION -->
+    <div class="highlight-box">
+      <div class="section-label">Reflection</div>
+      <h2>A machine that does something real.</h2>
+      <p>"This was one of those projects where the complexity sneaks up on you. What starts as a simple shredder concept quickly becomes a system — drive ratios, blade geometry, frame rigidity, safety access, material flow. Every decision connects to the next. Designing something that could actually be built, and actually solve a problem, is a completely different challenge from designing something that just looks good on screen. This one had to work."</p>
+    </div>
+
+    <!-- TOOLS -->
+    <div style="margin-top:3rem; padding-top:3rem; border-top:1px solid var(--border);">
+      <div class="section-label">Tools & Technologies</div>
+      <div class="tools-grid">
+        <span class="tool-chip">SolidWorks</span>
+        <span class="tool-chip">Multi-body Assembly</span>
+        <span class="tool-chip">Parametric Modelling</span>
+        <span class="tool-chip">Belt & Pulley Design</span>
+        <span class="tool-chip">Design for Manufacture</span>
+        <span class="tool-chip">Structural Frame Design</span>
+        <span class="tool-chip">Mechanical Drive Systems</span>
+        <span class="tool-chip">Sheet Metal Design</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PROJECT NAV -->
+<div class="project-nav">
+  <div class="container">
+    <div class="project-nav-inner">
+      <a href="generative-design.html" class="nav-link">
+        <span class="nav-link-label">← Previous</span>
+        <span class="nav-link-title">MorphCore — Topology Study</span>
+      </a>
+      <a href="../index.html#contact" class="nav-link" style="text-align:right;">
+        <span class="nav-link-label">Interested?</span>
+        <span class="nav-link-title">Get in Touch →</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 Elizabeth Olayinka — Built with purpose.</footer>
+</body>
+</html>
