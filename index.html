@@ -7,235 +7,85 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --bg: #F7F5F0;
-    --surface: #EFECE5;
-    --ink: #1A1714;
-    --ink-muted: #6B6560;
-    --accent: #C0392B;
-    --accent-warm: #E8734A;
-    --accent-light: #F9EDE8;
-    --border: #DDD9D0;
-    --white: #FFFFFF;
+    --bg: #F7F5F0; --surface: #EFECE5; --ink: #1A1714;
+    --ink-muted: #6B6560; --accent: #C0392B; --accent-warm: #E8734A;
+    --accent-light: #F9EDE8; --border: #DDD9D0; --white: #FFFFFF;
   }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; justify-content: space-between; align-items: center;
     padding: 1.2rem 3rem;
-    background: rgba(247,245,240,0.88);
-    backdrop-filter: blur(12px);
+    background: rgba(247,245,240,0.88); backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
-  .nav-logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.1rem;
-    color: var(--ink);
-    text-decoration: none;
-  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.05em;
-    text-transform: uppercase; text-decoration: none;
-    color: var(--ink-muted); transition: color 0.2s;
-  }
+  .nav-links a { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; color: var(--ink-muted); transition: color 0.2s; }
   .nav-links a:hover { color: var(--accent); }
 
-  /* ── SECTIONS ── */
   section { padding: 7rem 0; }
   .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
 
-  /* ── HERO ── */
-  #intro {
-    min-height: 100vh;
-    display: flex; align-items: center;
-    padding-top: 5rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute; inset: 0; z-index: 0;
-    background:
-      radial-gradient(ellipse 60% 50% at 80% 40%, rgba(192,57,43,0.07) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(232,115,74,0.06) 0%, transparent 70%);
-  }
-  .hero-grid {
-    position: absolute; inset: 0; z-index: 0;
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 60px 60px;
-    opacity: 0.4;
-    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
-  }
+  /* HERO */
+  #intro { min-height: 100vh; display: flex; align-items: center; padding-top: 5rem; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 60% 50% at 80% 40%, rgba(192,57,43,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 10% 80%, rgba(232,115,74,0.06) 0%, transparent 70%); }
+  .hero-grid { position: absolute; inset: 0; z-index: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; opacity: 0.4; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%); }
   .hero-inner { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 2rem; }
-
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 100px; padding: 0.4rem 1rem;
-    font-size: 0.78rem; font-weight: 500; color: var(--accent);
-    letter-spacing: 0.04em; margin-bottom: 2rem;
-    animation: fadeUp 0.6s ease both;
-  }
-  .badge-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--accent);
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-
-  h1.hero-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(3rem, 8vw, 5.5rem);
-    line-height: 1.05;
-    color: var(--ink);
-    margin-bottom: 0.5rem;
-    animation: fadeUp 0.6s 0.1s ease both;
-  }
-  h1.hero-name em {
-    font-style: italic;
-    color: var(--accent);
-  }
-
-  .hero-title {
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    color: var(--ink-muted); font-weight: 400;
-    margin-bottom: 2rem;
-    animation: fadeUp 0.6s 0.2s ease both;
-  }
-
-  .hero-meta {
-    display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center;
-    margin-bottom: 2.5rem;
-    animation: fadeUp 0.6s 0.3s ease both;
-  }
-  .hero-meta span {
-    font-size: 0.85rem; color: var(--ink-muted);
-    display: flex; align-items: center; gap: 0.4rem;
-  }
+  .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--white); border: 1px solid var(--border); border-radius: 100px; padding: 0.4rem 1rem; font-size: 0.78rem; font-weight: 500; color: var(--accent); letter-spacing: 0.04em; margin-bottom: 2rem; animation: fadeUp 0.6s ease both; }
+  .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+  h1.hero-name { font-family: 'DM Serif Display', serif; font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1.05; color: var(--ink); margin-bottom: 0.5rem; animation: fadeUp 0.6s 0.1s ease both; }
+  h1.hero-name em { font-style: italic; color: var(--accent); }
+  .hero-title { font-size: clamp(1rem, 2.5vw, 1.25rem); color: var(--ink-muted); font-weight: 400; margin-bottom: 2rem; animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; margin-bottom: 2.5rem; animation: fadeUp 0.6s 0.3s ease both; }
+  .hero-meta span { font-size: 0.85rem; color: var(--ink-muted); display: flex; align-items: center; gap: 0.4rem; }
   .hero-meta span svg { width: 14px; height: 14px; }
-
-  .hero-actions {
-    display: flex; gap: 1rem; flex-wrap: wrap;
-    animation: fadeUp 0.6s 0.4s ease both;
-  }
-  .btn-primary {
-    background: var(--ink); color: var(--white);
-    padding: 0.75rem 1.8rem; border-radius: 6px;
-    font-size: 0.88rem; font-weight: 500;
-    text-decoration: none; transition: background 0.2s, transform 0.15s;
-    display: inline-flex; align-items: center; gap: 0.5rem;
-  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.6s 0.4s ease both; }
+  .btn-primary { background: var(--ink); color: var(--white); padding: 0.75rem 1.8rem; border-radius: 6px; font-size: 0.88rem; font-weight: 500; text-decoration: none; transition: background 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 0.5rem; }
   .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
-  .btn-secondary {
-    background: transparent; color: var(--ink);
-    padding: 0.75rem 1.8rem; border-radius: 6px;
-    font-size: 0.88rem; font-weight: 500;
-    text-decoration: none; border: 1px solid var(--border);
-    transition: border-color 0.2s, transform 0.15s;
-    display: inline-flex; align-items: center; gap: 0.5rem;
-  }
+  .btn-secondary { background: transparent; color: var(--ink); padding: 0.75rem 1.8rem; border-radius: 6px; font-size: 0.88rem; font-weight: 500; text-decoration: none; border: 1px solid var(--border); transition: border-color 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 0.5rem; }
   .btn-secondary:hover { border-color: var(--ink); transform: translateY(-1px); }
 
-  /* ── ABOUT ── */
+  /* ABOUT */
   #about { background: var(--white); }
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--accent);
-    margin-bottom: 1.2rem;
-    display: flex; align-items: center; gap: 0.6rem;
-  }
-  .section-label::after {
-    content: ''; flex: 1; max-width: 40px;
-    height: 1px; background: var(--accent);
-  }
-  h2.section-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    line-height: 1.15; color: var(--ink);
-    margin-bottom: 2rem;
-  }
-  .about-text p {
-    font-size: 1rem; color: var(--ink-muted);
-    line-height: 1.85; margin-bottom: 1.2rem;
-  }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
+  .section-label::after { content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent); }
+  h2.section-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.15; color: var(--ink); margin-bottom: 2rem; }
+  .about-text p { font-size: 1rem; color: var(--ink-muted); line-height: 1.85; margin-bottom: 1.2rem; }
   .about-text p strong { color: var(--ink); font-weight: 600; }
 
-  /* ── STACK ── */
+  /* STACK */
   #stack { background: var(--surface); }
-  .stack-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 1rem; margin-top: 2.5rem;
-  }
-  .stack-card {
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 10px; padding: 1.2rem 1.4rem;
-    transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
-    cursor: default;
-  }
-  .stack-card:hover {
-    border-color: var(--accent); transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(192,57,43,0.1);
-  }
+  .stack-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
+  .stack-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.4rem; transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s; cursor: default; }
+  .stack-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(192,57,43,0.1); }
   .stack-card-name { font-weight: 600; font-size: 0.9rem; color: var(--ink); margin-bottom: 0.25rem; }
   .stack-card-sub { font-size: 0.75rem; color: var(--ink-muted); }
 
-  /* ── WORK ── */
+  /* WORK */
   #work { background: var(--white); }
-  .work-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 1.5rem; margin-top: 2.5rem;
-  }
+  .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
   @media (max-width: 600px) { .work-grid { grid-template-columns: 1fr; } }
-  .work-card {
-    border: 1px solid var(--border); border-radius: 12px;
-    overflow: hidden; transition: transform 0.2s, box-shadow 0.2s;
-    background: var(--bg);
-  }
+  .work-card { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; background: var(--bg); text-decoration: none; color: inherit; display: block; }
   .work-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
-  .work-card-img {
-    width: 100%; aspect-ratio: 16/9;
-    background: var(--surface);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 2.5rem;
-    border-bottom: 1px solid var(--border);
-  }
+  .work-card-img { width: 100%; aspect-ratio: 16/9; background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; border-bottom: 1px solid var(--border); overflow: hidden; }
+  .work-card-img img { width: 100%; height: 100%; object-fit: cover; }
+  .work-card-img.dark { background: #0a0a0a; }
+  .work-card-img.pcb { background: #111; }
   .work-card-body { padding: 1.2rem 1.4rem; }
   .work-card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
-  .tag {
-    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em;
-    background: var(--accent-light); color: var(--accent);
-    border-radius: 4px; padding: 0.2rem 0.55rem;
-  }
+  .tag { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; background: var(--accent-light); color: var(--accent); border-radius: 4px; padding: 0.2rem 0.55rem; }
   .work-card-title { font-weight: 600; font-size: 0.95rem; color: var(--ink); margin-bottom: 0.3rem; }
   .work-card-desc { font-size: 0.82rem; color: var(--ink-muted); line-height: 1.6; }
 
-  /* ── EXPERIENCE ── */
+  /* EXPERIENCE */
   #experience { background: var(--surface); }
   .exp-list { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 2.5rem; }
-  .exp-item {
-    display: grid; grid-template-columns: 140px 1fr;
-    gap: 2rem; padding-bottom: 2.5rem;
-    border-bottom: 1px solid var(--border);
-  }
+  .exp-item { display: grid; grid-template-columns: 140px 1fr; gap: 2rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
   .exp-item:last-child { border-bottom: none; padding-bottom: 0; }
   .exp-meta { text-align: right; }
   .exp-date { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--ink-muted); margin-bottom: 0.3rem; }
@@ -243,62 +93,33 @@
   .exp-org { font-size: 0.8rem; font-weight: 600; color: var(--accent); margin-bottom: 0.2rem; letter-spacing: 0.02em; }
   .exp-role { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--ink); margin-bottom: 0.8rem; }
   .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-  .exp-bullets li {
-    font-size: 0.87rem; color: var(--ink-muted); line-height: 1.65;
-    padding-left: 1.1rem; position: relative;
-  }
-  .exp-bullets li::before {
-    content: '—'; position: absolute; left: 0;
-    color: var(--accent); font-size: 0.7rem; top: 0.2rem;
-  }
+  .exp-bullets li { font-size: 0.87rem; color: var(--ink-muted); line-height: 1.65; padding-left: 1.1rem; position: relative; }
+  .exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; top: 0.2rem; }
 
-  /* ── EDUCATION ── */
+  /* EDUCATION */
   #education { background: var(--white); }
-  .edu-card {
-    border: 1px solid var(--border); border-radius: 12px;
-    padding: 2rem 2.4rem; margin-top: 2.5rem;
-    display: grid; grid-template-columns: 1fr auto;
-    gap: 1rem; align-items: start;
-  }
+  .edu-card { border: 1px solid var(--border); border-radius: 12px; padding: 2rem 2.4rem; margin-top: 2.5rem; display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; }
   .edu-degree { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--ink); margin-bottom: 0.3rem; }
   .edu-school { font-size: 0.9rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem; }
   .edu-detail { font-size: 0.83rem; color: var(--ink-muted); line-height: 1.6; }
-  .edu-year {
-    font-family: 'DM Mono', monospace; font-size: 0.8rem;
-    color: var(--ink-muted); white-space: nowrap; padding-top: 0.2rem;
-  }
+  .edu-year { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--ink-muted); white-space: nowrap; padding-top: 0.2rem; }
 
-  /* ── CONTACT ── */
+  /* CONTACT */
   #contact { background: var(--ink); }
   #contact .section-label { color: var(--accent-warm); }
   #contact .section-label::after { background: var(--accent-warm); }
   #contact h2.section-title { color: var(--white); }
-  .contact-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 3rem; margin-top: 3rem;
-  }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
   @media (max-width: 600px) { .contact-grid { grid-template-columns: 1fr; } }
   .contact-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; font-weight: 500; }
   .contact-value { font-size: 1rem; color: var(--white); font-weight: 500; }
   .contact-value a { color: var(--accent-warm); text-decoration: none; }
   .contact-value a:hover { text-decoration: underline; }
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--ink); border-top: 1px solid rgba(255,255,255,0.08);
-    padding: 1.5rem 2rem; text-align: center;
-    font-size: 0.78rem; color: rgba(255,255,255,0.3);
-  }
+  footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.08); padding: 1.5rem 2rem; text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.3); }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .reveal {
-    opacity: 0; transform: translateY(24px);
-    transition: opacity 0.65s ease, transform 0.65s ease;
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
   .reveal.visible { opacity: 1; transform: none; }
 
   @media (max-width: 700px) {
@@ -312,7 +133,6 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="#intro" class="nav-logo">Elizabeth Olayinka</a>
   <ul class="nav-links">
@@ -330,10 +150,7 @@
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-inner">
-    <div class="hero-badge">
-      <span class="badge-dot"></span>
-      Available for work
-    </div>
+    <div class="hero-badge"><span class="badge-dot"></span>Available for work</div>
     <h1 class="hero-name">Elizabeth<br/><em>Olayinka</em></h1>
     <p class="hero-title">Registered Nurse · AI Specialist · CAD & Creative Technologist</p>
     <div class="hero-meta">
@@ -357,18 +174,10 @@
     <div class="section-label reveal">About me</div>
     <h2 class="section-title reveal">The nurse who refused<br/>to stay in one lane.</h2>
     <div class="about-text reveal">
-      <p>
-        I am a <strong>Registered Nurse and Public Health professional</strong> by training - and a CAD designer, video producer, AI specialist, and electrical design enthusiast by passion. People are often surprised by that combination. I stopped being surprised a long time ago.
-      </p>
-      <p>
-        Nursing taught me precision, high-stakes decision-making, and an obsessive attention to detail. It trained me to stay calm under pressure, follow complex protocols, and care deeply about outcomes. What it didn't teach me — I went out and learned myself. Through curiosity, late nights, a brilliant roommate, and a stubborn refusal to be boxed in, I picked up CAD modelling, electrical design, video production, and AI model evaluation, not as a career pivot, but because <strong>I genuinely love building things</strong>.
-      </p>
-      <p>
-        Today I sit at a rare intersection: the analytical rigour of healthcare meets the creative precision of engineering and digital media. I can evaluate an AI model's STEM output in the morning, render a 3D CAD assembly in the afternoon, and edit a polished video by evening. I thrive in remote environments, adapt quickly to new tools, and bring both <strong>clinical discipline and creative energy</strong> to everything I touch.
-      </p>
-      <p>
-        If you need someone who is genuinely multi-skilled — not just on paper — I am that person.
-      </p>
+      <p>I am a <strong>Registered Nurse and Public Health professional</strong> by training — and a CAD designer, video producer, AI specialist, and electrical design enthusiast by passion. People are often surprised by that combination. I stopped being surprised a long time ago.</p>
+      <p>Nursing taught me precision, high-stakes decision-making, and an obsessive attention to detail. It trained me to stay calm under pressure, follow complex protocols, and care deeply about outcomes. What it didn't teach me — I went out and learned myself. Through curiosity, late nights, a brilliant roommate, and a stubborn refusal to be boxed in, I picked up CAD modelling, electrical design, video production, and AI model evaluation, not as a career pivot, but because <strong>I genuinely love building things</strong>.</p>
+      <p>Today I sit at a rare intersection: the analytical rigour of healthcare meets the creative precision of engineering and digital media. I can evaluate an AI model's STEM output in the morning, render a 3D CAD assembly in the afternoon, and edit a polished video by evening. I thrive in remote environments, adapt quickly to new tools, and bring both <strong>clinical discipline and creative energy</strong> to everything I touch.</p>
+      <p>If you need someone who is genuinely multi-skilled — not just on paper — I am that person.</p>
     </div>
   </div>
 </section>
@@ -379,9 +188,9 @@
     <div class="section-label reveal">Tools & Technologies</div>
     <h2 class="section-title reveal">My Stack</h2>
     <div class="stack-grid reveal">
+      <div class="stack-card"><div class="stack-card-name">KiCad</div><div class="stack-card-sub">PCB Design & Schematic Capture</div></div>
       <div class="stack-card"><div class="stack-card-name">FreeCAD / AutoCAD</div><div class="stack-card-sub">3D & 2D CAD Design</div></div>
       <div class="stack-card"><div class="stack-card-name">SolidWorks</div><div class="stack-card-sub">Mechanical CAD Modelling</div></div>
-      <div class="stack-card"><div class="stack-card-name">KiCad / LibrePCB</div><div class="stack-card-sub">Electronics & PCB Design</div></div>
       <div class="stack-card"><div class="stack-card-name">ANSYS</div><div class="stack-card-sub">Simulation & FEA</div></div>
       <div class="stack-card"><div class="stack-card-name">DaVinci Resolve</div><div class="stack-card-sub">Video Editing & Production</div></div>
       <div class="stack-card"><div class="stack-card-name">OpenShot / Shotcut</div><div class="stack-card-sub">Video Post-Production</div></div>
@@ -393,45 +202,75 @@
   </div>
 </section>
 
-<!-- WORK -->
+<!-- WORK — ordered: VoltLink, ShredCore, MorphCore, EquiRest -->
 <section id="work">
   <div class="container">
     <div class="section-label reveal">Projects</div>
     <h2 class="section-title reveal">Some of my work</h2>
-    <p style="color:var(--ink-muted);font-size:0.9rem;margin-top:-1rem;margin-bottom:2rem;" class="reveal">Projects coming soon — add your files here.</p>
     <div class="work-grid reveal">
-      <div class="work-card">
-        <div class="work-card-img">⚙️</div>
-        <div class="work-card-body">
-          <div class="work-card-tags"><span class="tag">CAD Design</span><span class="tag">3D Modelling</span></div>
-          <div class="work-card-title">CAD Design Project</div>
-          <div class="work-card-desc">Add your CAD project description here — tools used, problem solved, outcome delivered.</div>
+
+      <!-- 1. VoltLink -->
+      <a href="work/voltlink.html" class="work-card">
+        <div class="work-card-img pcb">
+          <img src="voltlink-pcb-kicad.png" alt="VoltLink charger PCB layout in KiCad editor"/>
         </div>
-      </div>
-      <div class="work-card">
-        <div class="work-card-img">🔌</div>
         <div class="work-card-body">
-          <div class="work-card-tags"><span class="tag">Electronics</span><span class="tag">PCB Design</span></div>
-          <div class="work-card-title">Electrical Design Project</div>
-          <div class="work-card-desc">Add your electrical/PCB design project here — schematic, layout, and outcome.</div>
+          <div class="work-card-tags"><span class="tag">PCB Design</span><span class="tag">Power Electronics</span><span class="tag">KiCad</span></div>
+          <div class="work-card-title">VoltLink — Laptop-Grade Power Bank</div>
+          <div class="work-card-desc">A fully designed laptop-grade power bank — flyback charger, push-pull inverter, and short-circuit protection, from schematic to routed PCB in KiCad.</div>
         </div>
-      </div>
-      <div class="work-card">
-        <div class="work-card-img">🎬</div>
+      </a>
+
+      <!-- 2. ShredCore -->
+      <a href="work/shredcore.html" class="work-card">
+        <div class="work-card-img" style="background:#f0f4ff;">
+          <img src="shredder-1.png" alt="ShredCore tabletop plastic shredder CAD render"/>
+        </div>
         <div class="work-card-body">
-          <div class="work-card-tags"><span class="tag">Video Production</span><span class="tag">Editing</span></div>
-          <div class="work-card-title">Video Production Project</div>
-          <div class="work-card-desc">Add your video editing or production project here — style, tools, and deliverable.</div>
+          <div class="work-card-tags"><span class="tag">CAD Design</span><span class="tag">Assembly</span><span class="tag">Sustainability</span></div>
+          <div class="work-card-title">ShredCore Tabletop — Plastic Shredder</div>
+          <div class="work-card-desc">A fully modelled tabletop plastic shredder — compact, manufacturable, and designed for the circular economy.</div>
         </div>
-      </div>
-      <div class="work-card">
-        <div class="work-card-img">🤖</div>
+      </a>
+
+      <!-- 3. MorphCore -->
+      <a href="work/generative-design.html" class="work-card">
+        <div class="work-card-img dark">
+          <img src="topology-study.png" alt="MorphCore topology optimisation study" style="opacity:0.92;"/>
+        </div>
         <div class="work-card-body">
-          <div class="work-card-tags"><span class="tag">AI Annotation</span><span class="tag">Data Quality</span></div>
-          <div class="work-card-title">AI Data Evaluation Work</div>
-          <div class="work-card-desc">Add your AI annotation or model evaluation work here — scope, platform, and impact.</div>
+          <div class="work-card-tags"><span class="tag">Generative Design</span><span class="tag">Topology</span><span class="tag">SolidWorks</span></div>
+          <div class="work-card-title">MorphCore — Topology Optimisation Study</div>
+          <div class="work-card-desc">Exploring generative design — letting algorithms identify where material must stay and where it can go, optimising for strength, weight, and manufacturing constraints.</div>
         </div>
-      </div>
+      </a>
+
+      <!-- 4. EquiRest Pro -->
+      <a href="work/headphone-stand.html" class="work-card">
+        <div class="work-card-img">
+          <img src="headphone-cad.png" alt="EquiRest Pro headphone stand CAD render"/>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-tags"><span class="tag">CAD Design</span><span class="tag">3D Printing</span><span class="tag">Product Design</span></div>
+          <div class="work-card-title">EquiRest Pro — Headphone Stand</div>
+          <div class="work-card-desc">A stability-engineered desktop headphone stand designed for the corporate workspace. From SolidWorks model to physical 3D printed prototype.</div>
+        </div>
+      </a>
+
+      <!-- 5. FlushPoint — spans full width -->
+      <a href="work/flushpoint.html" class="work-card" style="grid-column: 1 / -1;">
+        <div class="work-card-img" style="background:#0d0d0d; aspect-ratio:21/6; position:relative;">
+          <span style="font-size:1.5rem;">🎬</span>
+          <span style="position:absolute;bottom:1rem;left:1.4rem;font-family:'DM Mono',monospace;font-size:0.72rem;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;">Video Edit · DaVinci Resolve</span>
+          <span style="position:absolute;bottom:1rem;right:1.4rem;font-size:1.5rem;">💙</span>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-tags"><span class="tag">Video Editing</span><span class="tag">DaVinci Resolve</span><span class="tag">Sci-Fi Short</span><span class="tag">Post-Production</span></div>
+          <div class="work-card-title">FlushPoint — The Alien in the Drain</div>
+          <div class="work-card-desc">A short comedic sci-fi edit — a girl accidentally flushes an alien, her brother investigates, and catches just a glimpse of blue feathers disappearing into the drain. Edited in DaVinci Resolve to demonstrate narrative pacing, cut timing, and visual storytelling.</div>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
@@ -445,7 +284,7 @@
 
       <div class="exp-item reveal">
         <div class="exp-meta">
-          <div class="exp-date">2025 – Present</div>
+          <div class="exp-date">2025 – 2026</div>
           <div class="exp-location">Remote</div>
         </div>
         <div class="exp-body">
@@ -462,7 +301,7 @@
 
       <div class="exp-item reveal">
         <div class="exp-meta">
-          <div class="exp-date">2024 – Present</div>
+          <div class="exp-date">2023 – Present</div>
           <div class="exp-location">Remote</div>
         </div>
         <div class="exp-body">
@@ -470,16 +309,16 @@
           <div class="exp-role">CAD Designer & Electrical Design Specialist</div>
           <ul class="exp-bullets">
             <li>Designed 3D CAD models and technical assemblies using FreeCAD, AutoCAD, and SolidWorks for engineering and product design briefs.</li>
-            <li>Produced electrical schematics and PCB layouts using KiCad and LibrePCB for electronics projects.</li>
+            <li>Produced electrical schematics and PCB layouts using KiCad for electronics projects including power bank and charger systems.</li>
             <li>Applied Design for Manufacturing (DFM) principles to optimise geometries for real-world fabrication.</li>
-            <li>Collaborated closely on multi-disciplinary engineering briefs, delivering precise technical documentation and version-controlled files.</li>
+            <li>Delivered precise technical documentation and version-controlled files across multi-disciplinary engineering briefs.</li>
           </ul>
         </div>
       </div>
 
       <div class="exp-item reveal">
         <div class="exp-meta">
-          <div class="exp-date">2024 – Present</div>
+          <div class="exp-date">2023 – Present</div>
           <div class="exp-location">Remote / Freelance</div>
         </div>
         <div class="exp-body">
@@ -534,24 +373,21 @@
   <div class="container">
     <div class="section-label reveal">Academic Background</div>
     <h2 class="section-title reveal">Education</h2>
-
     <div class="edu-card reveal">
       <div>
         <div class="edu-degree">Master of Public Health — Public Administration</div>
         <div class="edu-school">Georgia Southern University, USA</div>
         <div class="edu-detail">Relevant coursework: Epidemiology · Health Policy · Biostatistics · Research Methods · Data Analysis · Public Health Management</div>
       </div>
-      <div class="edu-year">2024
-      </div>
+      <div class="edu-year">2020</div>
     </div>
-
     <div class="edu-card reveal" style="margin-top:1rem;">
       <div>
         <div class="edu-degree">Bachelor of Nursing Science (BSN)</div>
         <div class="edu-school">Bowen University, Nigeria</div>
-        <div class="edu-detail">Foundation in clinical practice, patient care, anatomy, pharmacology, and medical documentation. Additional self-directed learning in CAD design, electrical engineering, video production, and AI evaluation.</div>
+        <div class="edu-detail">Foundation in clinical practice, patient care, anatomy, pharmacology, and medical documentation. Additional self-directed learning in CAD design, electrical engineering, PCB design, video production, and AI evaluation.</div>
       </div>
-      <div class="edu-year">2020</div>
+      <div class="edu-year">2018</div>
     </div>
   </div>
 </section>
@@ -582,12 +418,9 @@
   </div>
 </section>
 
-<footer>
-  © 2026 Elizabeth Olayinka — Built with purpose.
-</footer>
+<footer>© 2026 Elizabeth Olayinka — Built with purpose.</footer>
 
 <script>
-  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
