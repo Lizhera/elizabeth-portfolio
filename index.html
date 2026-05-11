@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Elizabeth Olayinka — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #F7F5F0;
+    --surface: #EFECE5;
+    --ink: #1A1714;
+    --ink-muted: #6B6560;
+    --accent: #C0392B;
+    --accent-warm: #E8734A;
+    --accent-light: #F9EDE8;
+    --border: #DDD9D0;
+    --white: #FFFFFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(247,245,240,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.05em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--ink-muted); transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── SECTIONS ── */
+  section { padding: 7rem 0; }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+  /* ── HERO ── */
+  #intro {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding-top: 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 40%, rgba(192,57,43,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(232,115,74,0.06) 0%, transparent 70%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.4;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 100px; padding: 0.4rem 1rem;
+    font-size: 0.78rem; font-weight: 500; color: var(--accent);
+    letter-spacing: 0.04em; margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .badge-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  h1.hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  h1.hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-title {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--ink-muted); font-weight: 400;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .hero-meta span {
+    font-size: 0.85rem; color: var(--ink-muted);
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .hero-meta span svg { width: 14px; height: 14px; }
+
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .btn-primary {
+    background: var(--ink); color: var(--white);
+    padding: 0.75rem 1.8rem; border-radius: 6px;
+    font-size: 0.88rem; font-weight: 500;
+    text-decoration: none; transition: background 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent; color: var(--ink);
+    padding: 0.75rem 1.8rem; border-radius: 6px;
+    font-size: 0.88rem; font-weight: 500;
+    text-decoration: none; border: 1px solid var(--border);
+    transition: border-color 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-secondary:hover { border-color: var(--ink); transform: translateY(-1px); }
+
+  /* ── ABOUT ── */
+  #about { background: var(--white); }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .section-label::after {
+    content: ''; flex: 1; max-width: 40px;
+    height: 1px; background: var(--accent);
+  }
+  h2.section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.15; color: var(--ink);
+    margin-bottom: 2rem;
+  }
+  .about-text p {
+    font-size: 1rem; color: var(--ink-muted);
+    line-height: 1.85; margin-bottom: 1.2rem;
+  }
+  .about-text p strong { color: var(--ink); font-weight: 600; }
+
+  /* ── STACK ── */
+  #stack { background: var(--surface); }
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem; margin-top: 2.5rem;
+  }
+  .stack-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.2rem 1.4rem;
+    transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+    cursor: default;
+  }
+  .stack-card:hover {
+    border-color: var(--accent); transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(192,57,43,0.1);
+  }
+  .stack-card-name { font-weight: 600; font-size: 0.9rem; color: var(--ink); margin-bottom: 0.25rem; }
+  .stack-card-sub { font-size: 0.75rem; color: var(--ink-muted); }
+
+  /* ── WORK ── */
+  #work { background: var(--white); }
+  .work-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; margin-top: 2.5rem;
+  }
+  @media (max-width: 600px) { .work-grid { grid-template-columns: 1fr; } }
+  .work-card {
+    border: 1px solid var(--border); border-radius: 12px;
+    overflow: hidden; transition: transform 0.2s, box-shadow 0.2s;
+    background: var(--bg);
+  }
+  .work-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+  .work-card-img {
+    width: 100%; aspect-ratio: 16/9;
+    background: var(--surface);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .work-card-body { padding: 1.2rem 1.4rem; }
+  .work-card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
+  .tag {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em;
+    background: var(--accent-light); color: var(--accent);
+    border-radius: 4px; padding: 0.2rem 0.55rem;
+  }
+  .work-card-title { font-weight: 600; font-size: 0.95rem; color: var(--ink); margin-bottom: 0.3rem; }
+  .work-card-desc { font-size: 0.82rem; color: var(--ink-muted); line-height: 1.6; }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--surface); }
+  .exp-list { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 2.5rem; }
+  .exp-item {
+    display: grid; grid-template-columns: 140px 1fr;
+    gap: 2rem; padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .exp-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .exp-meta { text-align: right; }
+  .exp-date { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--ink-muted); margin-bottom: 0.3rem; }
+  .exp-location { font-size: 0.78rem; color: var(--ink-muted); }
+  .exp-org { font-size: 0.8rem; font-weight: 600; color: var(--accent); margin-bottom: 0.2rem; letter-spacing: 0.02em; }
+  .exp-role { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--ink); margin-bottom: 0.8rem; }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .exp-bullets li {
+    font-size: 0.87rem; color: var(--ink-muted); line-height: 1.65;
+    padding-left: 1.1rem; position: relative;
+  }
+  .exp-bullets li::before {
+    content: '—'; position: absolute; left: 0;
+    color: var(--accent); font-size: 0.7rem; top: 0.2rem;
+  }
+
+  /* ── EDUCATION ── */
+  #education { background: var(--white); }
+  .edu-card {
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 2rem 2.4rem; margin-top: 2.5rem;
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 1rem; align-items: start;
+  }
+  .edu-degree { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--ink); margin-bottom: 0.3rem; }
+  .edu-school { font-size: 0.9rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem; }
+  .edu-detail { font-size: 0.83rem; color: var(--ink-muted); line-height: 1.6; }
+  .edu-year {
+    font-family: 'DM Mono', monospace; font-size: 0.8rem;
+    color: var(--ink-muted); white-space: nowrap; padding-top: 0.2rem;
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--ink); }
+  #contact .section-label { color: var(--accent-warm); }
+  #contact .section-label::after { background: var(--accent-warm); }
+  #contact h2.section-title { color: var(--white); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; margin-top: 3rem;
+  }
+  @media (max-width: 600px) { .contact-grid { grid-template-columns: 1fr; } }
+  .contact-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; font-weight: 500; }
+  .contact-value { font-size: 1rem; color: var(--white); font-weight: 500; }
+  .contact-value a { color: var(--accent-warm); text-decoration: none; }
+  .contact-value a:hover { text-decoration: underline; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 1.5rem 2rem; text-align: center;
+    font-size: 0.78rem; color: rgba(255,255,255,0.3);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .exp-meta { text-align: left; }
+    .edu-card { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#intro" class="nav-logo">Elizabeth Olayinka</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="intro">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Available for work
+    </div>
+    <h1 class="hero-name">Elizabeth<br/><em>Olayinka</em></h1>
+    <p class="hero-title">Registered Nurse · AI Specialist · CAD & Creative Technologist</p>
+    <div class="hero-meta">
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        El Paso, TX — USA
+      </span>
+      <span>eo03983@georgiasouthern.edu</span>
+      <span>615-992-4233</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#work" class="btn-primary">View My Work →</a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label reveal">About me</div>
+    <h2 class="section-title reveal">The nurse who refused<br/>to stay in one lane.</h2>
+    <div class="about-text reveal">
+      <p>
+        I am a <strong>Registered Nurse and Public Health professional</strong> by training — and a CAD designer, video producer, AI specialist, and electrical design enthusiast by passion. People are often surprised by that combination. I stopped being surprised a long time ago.
+      </p>
+      <p>
+        Nursing taught me precision, high-stakes decision-making, and an obsessive attention to detail. It trained me to stay calm under pressure, follow complex protocols, and care deeply about outcomes. What it didn't teach me — I went out and learned myself. Through curiosity, late nights, a brilliant roommate, and a stubborn refusal to be boxed in, I picked up CAD modelling, electrical design, video production, and AI model evaluation, not as a career pivot, but because <strong>I genuinely love building things</strong>.
+      </p>
+      <p>
+        Today I sit at a rare intersection: the analytical rigour of healthcare meets the creative precision of engineering and digital media. I can evaluate an AI model's STEM output in the morning, render a 3D CAD assembly in the afternoon, and edit a polished video by evening. I thrive in remote environments, adapt quickly to new tools, and bring both <strong>clinical discipline and creative energy</strong> to everything I touch.
+      </p>
+      <p>
+        If you need someone who is genuinely multi-skilled — not just on paper — I am that person.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack">
+  <div class="container">
+    <div class="section-label reveal">Tools & Technologies</div>
+    <h2 class="section-title reveal">My Stack</h2>
+    <div class="stack-grid reveal">
+      <div class="stack-card"><div class="stack-card-name">FreeCAD / AutoCAD</div><div class="stack-card-sub">3D & 2D CAD Design</div></div>
+      <div class="stack-card"><div class="stack-card-name">SolidWorks</div><div class="stack-card-sub">Mechanical CAD Modelling</div></div>
+      <div class="stack-card"><div class="stack-card-name">KiCad / LibrePCB</div><div class="stack-card-sub">Electronics & PCB Design</div></div>
+      <div class="stack-card"><div class="stack-card-name">ANSYS</div><div class="stack-card-sub">Simulation & FEA</div></div>
+      <div class="stack-card"><div class="stack-card-name">DaVinci Resolve</div><div class="stack-card-sub">Video Editing & Production</div></div>
+      <div class="stack-card"><div class="stack-card-name">OpenShot / Shotcut</div><div class="stack-card-sub">Video Post-Production</div></div>
+      <div class="stack-card"><div class="stack-card-name">AI Model Evaluation</div><div class="stack-card-sub">LLM Output Review & Ranking</div></div>
+      <div class="stack-card"><div class="stack-card-name">Excel / Google Sheets</div><div class="stack-card-sub">Data Analysis & Reporting</div></div>
+      <div class="stack-card"><div class="stack-card-name">Google Workspace</div><div class="stack-card-sub">Docs, Drive, Forms</div></div>
+      <div class="stack-card"><div class="stack-card-name">Cybersecurity Awareness</div><div class="stack-card-sub">Data Privacy & Protection</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="container">
+    <div class="section-label reveal">Projects</div>
+    <h2 class="section-title reveal">Some of my work</h2>
+    <p style="color:var(--ink-muted);font-size:0.9rem;margin-top:-1rem;margin-bottom:2rem;" class="reveal">Projects coming soon — add your files here.</p>
+    <div class="work-grid reveal">
+      <div class="work-card">
+        <div class="work-card-img">⚙️</div>
+        <div class="work-card-body">
+          <div class="work-card-tags"><span class="tag">CAD Design</span><span class="tag">3D Modelling</span></div>
+          <div class="work-card-title">CAD Design Project</div>
+          <div class="work-card-desc">Add your CAD project description here — tools used, problem solved, outcome delivered.</div>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-card-img">🔌</div>
+        <div class="work-card-body">
+          <div class="work-card-tags"><span class="tag">Electronics</span><span class="tag">PCB Design</span></div>
+          <div class="work-card-title">Electrical Design Project</div>
+          <div class="work-card-desc">Add your electrical/PCB design project here — schematic, layout, and outcome.</div>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-card-img">🎬</div>
+        <div class="work-card-body">
+          <div class="work-card-tags"><span class="tag">Video Production</span><span class="tag">Editing</span></div>
+          <div class="work-card-title">Video Production Project</div>
+          <div class="work-card-desc">Add your video editing or production project here — style, tools, and deliverable.</div>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-card-img">🤖</div>
+        <div class="work-card-body">
+          <div class="work-card-tags"><span class="tag">AI Annotation</span><span class="tag">Data Quality</span></div>
+          <div class="work-card-title">AI Data Evaluation Work</div>
+          <div class="work-card-desc">Add your AI annotation or model evaluation work here — scope, platform, and impact.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label reveal">Work History</div>
+    <h2 class="section-title reveal">Experience</h2>
+    <div class="exp-list">
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-date">2025 – 2026</div>
+          <div class="exp-location">Remote</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-org">Freelance / Contract</div>
+          <div class="exp-role">AI Data Rater & Annotation Specialist</div>
+          <ul class="exp-bullets">
+            <li>Evaluated and ranked AI-generated responses for accuracy, coherence, and relevance across large-scale datasets.</li>
+            <li>Applied complex annotation guidelines with consistent precision, maintaining high accuracy rates under daily productivity targets.</li>
+            <li>Identified factual errors, biases, and logical inconsistencies in LLM outputs to improve model alignment.</li>
+            <li>Performed comparative response ranking to support reinforcement learning from human feedback (RLHF) workflows.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-date">2023 – Present</div>
+          <div class="exp-location">Remote</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-org">Independent / Collaborative Projects</div>
+          <div class="exp-role">CAD Designer & Electrical Design Specialist</div>
+          <ul class="exp-bullets">
+            <li>Designed 3D CAD models and technical assemblies using FreeCAD, AutoCAD, and SolidWorks for engineering and product design briefs.</li>
+            <li>Produced electrical schematics and PCB layouts using KiCad and LibrePCB for electronics projects.</li>
+            <li>Applied Design for Manufacturing (DFM) principles to optimise geometries for real-world fabrication.</li>
+            <li>Collaborated closely on multi-disciplinary engineering briefs, delivering precise technical documentation and version-controlled files.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-date">2023 – Present</div>
+          <div class="exp-location">Remote / Freelance</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-org">Independent Projects</div>
+          <div class="exp-role">Video Production Specialist</div>
+          <ul class="exp-bullets">
+            <li>Produced and edited video content for clients across creative, educational, and organisational briefs.</li>
+            <li>Proficient in DaVinci Resolve, OpenShot, Shotcut, and CapCut for end-to-end post-production.</li>
+            <li>Handled colour grading, audio syncing, motion graphics, and final export for multi-platform delivery.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-date">2023 – 2024</div>
+          <div class="exp-location">Academic</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-org">Academic Research</div>
+          <div class="exp-role">Public Health Research Assistant</div>
+          <ul class="exp-bullets">
+            <li>Conducted structured data collection, cleaning, and analysis for health-related research studies.</li>
+            <li>Produced detailed research reports and evidence-based summaries from complex datasets.</li>
+            <li>Ensured full data integrity and accuracy throughout all research processes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-date">2020 – 2022</div>
+          <div class="exp-location">Healthcare</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-org">Clinical Setting</div>
+          <div class="exp-role">Clinical Documentation & Support — Registered Nurse</div>
+          <ul class="exp-bullets">
+            <li>Managed and reviewed sensitive patient records with meticulous attention to clinical detail and accuracy.</li>
+            <li>Ensured strict compliance with confidentiality, data privacy, and documentation standards.</li>
+            <li>Supported data organisation and structured reporting within high-pressure clinical workflows.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-label reveal">Academic Background</div>
+    <h2 class="section-title reveal">Education</h2>
+
+    <div class="edu-card reveal">
+      <div>
+        <div class="edu-degree">Master of Public Health — Public Administration</div>
+        <div class="edu-school">Georgia Southern University, USA</div>
+        <div class="edu-detail">Relevant coursework: Epidemiology · Health Policy · Biostatistics · Research Methods · Data Analysis · Public Health Management</div>
+      </div>
+      <div class="edu-year">2020</div>
+    </div>
+
+    <div class="edu-card reveal" style="margin-top:1rem;">
+      <div>
+        <div class="edu-degree">Bachelor of Nursing Science (BSN)</div>
+        <div class="edu-school">Bowen University, Nigeria</div>
+        <div class="edu-detail">Foundation in clinical practice, patient care, anatomy, pharmacology, and medical documentation. Additional self-directed learning in CAD design, electrical engineering, video production, and AI evaluation.</div>
+      </div>
+      <div class="edu-year">2020</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Let's talk</div>
+    <h2 class="section-title">Open to opportunities.<br/>Let's build something.</h2>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value"><a href="mailto:eo03983@georgiasouthern.edu">eo03983@georgiasouthern.edu</a></div>
+      </div>
+      <div>
+        <div class="contact-label">Phone</div>
+        <div class="contact-value">615-992-4233</div>
+      </div>
+      <div>
+        <div class="contact-label">Location</div>
+        <div class="contact-value">El Paso, TX 79912 — USA</div>
+      </div>
+      <div>
+        <div class="contact-label">Availability</div>
+        <div class="contact-value" style="color:#6fcf7a;">● Available for remote work</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Elizabeth Olayinka — Built with purpose.
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
